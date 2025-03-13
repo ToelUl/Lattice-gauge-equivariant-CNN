@@ -625,7 +625,7 @@ class LgeConvNet(nn.Module):
         gauge_invariant: bool = False,
         use_act_fn: bool = True,
         use_norm: bool = True,
-        threshold: float = 1e-6,
+        threshold: float = 1e-7,
     ):
         super().__init__()
         self.dims = dims

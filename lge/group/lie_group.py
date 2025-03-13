@@ -302,8 +302,8 @@ class U1Group(LieGroupBase):
         Initialize the U(1) group.
         """
         rep_dim = 1
-        identity = torch.tensor(1.0, dtype=torch.complex64)
-        super().__init__(rep_dim=rep_dim, identity=identity, element_shape=())
+        identity = torch.ones((rep_dim, rep_dim), dtype=torch.complex64)
+        super().__init__(rep_dim=rep_dim, identity=identity)
         self.algebra = U1LieAlgebra()
 
     def elements(self) -> torch.Tensor:

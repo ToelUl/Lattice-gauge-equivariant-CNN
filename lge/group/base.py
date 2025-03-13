@@ -1,6 +1,5 @@
 import torch
 
-
 class GroupBase(torch.nn.Module):
     """Base class for implementing mathematical groups using PyTorch."""
 
