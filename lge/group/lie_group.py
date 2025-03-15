@@ -44,7 +44,7 @@ class SU2LieAlgebra(LieAlgebraBase):
             torch.Tensor: The S_z matrix of shape (dim, dim) with complex entries.
         """
         dim = int(2 * self.spin + 1)
-        m_values = torch.tensor([self.spin - i for i in range(dim)], dtype=torch.complex64)
+        m_values = torch.tensor([self.spin - i for i in range(dim)], dtype=torch.complex64, requires_grad=False)
         return torch.diag(m_values)
 
     def _generate_S_plus_minus(self) -> tuple:
@@ -55,7 +55,7 @@ class SU2LieAlgebra(LieAlgebraBase):
             tuple: A tuple (S_plus, S_minus) of tensors.
         """
         dim = int(2 * self.spin + 1)
-        S_plus = torch.zeros((dim, dim), dtype=torch.complex64)
+        S_plus = torch.zeros((dim, dim), dtype=torch.complex64, requires_grad=False)
         for i in range(dim - 1):
             j = self.spin - i  # Corresponds to m = s - i
             b_j = np.sqrt((self.spin + j) * (self.spin + 1 - j))
@@ -115,7 +115,7 @@ class SU2Group(LieGroupBase):
             raise ValueError("Spin must be a positive multiple of 0.5.")
         algebra = SU2LieAlgebra(spin=spin)
         rep_dim = algebra.rep_dim
-        identity = torch.eye(rep_dim, dtype=torch.complex64)
+        identity = torch.eye(rep_dim, dtype=torch.complex64, requires_grad=False)
         super().__init__(rep_dim=rep_dim, identity=identity)
         self.spin = spin
         self.algebra = algebra
@@ -273,7 +273,7 @@ class U1LieAlgebra(LieAlgebraBase):
         """
         lie_alg_dim = 1  # For u(1), the Lie algebra dimension is 1
         super().__init__(rep_dim=rep_dim, lie_alg_dim=lie_alg_dim)
-        self.generator = torch.tensor(1j, dtype=torch.complex64)
+        self.generator = torch.tensor(1j, dtype=torch.complex64, requires_grad=False)
 
     def generators(self) -> list:
         """
@@ -302,7 +302,7 @@ class U1Group(LieGroupBase):
         Initialize the U(1) group.
         """
         rep_dim = 1
-        identity = torch.ones((rep_dim, rep_dim), dtype=torch.complex64)
+        identity = torch.ones((rep_dim, rep_dim), dtype=torch.complex64, requires_grad=False)
         super().__init__(rep_dim=rep_dim, identity=identity)
         self.algebra = U1LieAlgebra()
 

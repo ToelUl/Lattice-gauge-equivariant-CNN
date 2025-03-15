@@ -111,7 +111,7 @@ class LConvBilin(nn.Module):
             t_w_size += 1
 
         self.weight = torch.nn.Parameter(torch.empty(w_out_size, w_in_size, t_w_size))
-        torch.nn.init.xavier_uniform_(self.weight)
+        torch.nn.init.xavier_normal_(self.weight)
 
         # Construct the unit matrix
         self.unit_matrix_re = torch.eye(self.rep_dim)
