@@ -30,6 +30,11 @@ class SU2LieAlgebra(LieAlgebraBase):
         self.S_x = 0.5 * (self.S_plus + self.S_minus)
         self.S_y = (self.S_plus - self.S_minus) / 2j
 
+        # Pauli matrices
+        self.sigma_x = self.S_x / self.spin
+        self.sigma_y = self.S_y / self.spin
+        self.sigma_z = self.S_z / self.spin
+
         # Generators: e_j = -i * S_j
         self.e_1 = -1j * self.S_x
         self.e_2 = -1j * self.S_y
